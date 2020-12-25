@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Layout } from 'antd';
-import {Menu ,Icon} from 'antd';
+import {Menu ,Icon,Space} from 'antd';
 import {Link } from 'umi';
 import routes from '../config/routes'
 import './index.less'
@@ -29,7 +29,7 @@ export default class BasicLayout extends Component {
       <Layout style={{ minHeight: '100vh'  ,color: 'white' }}>
       <Sider width={200}  collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
         <div style={{ height: '32px',lineHeight:'32px',textAlign:"center", background: 'rgba(255,255,255,.2)', margin: '16px',overflow:"hidden"}}>
-        <DesktopOutlined style={{paddingLeft:"10px"}}/><space style={{marginLeft:"20px"}}>高校拼车后台系统</space>
+        <DesktopOutlined style={{paddingLeft:"10px"}}/><Space style={{marginLeft:"20px"}}>高校拼车后台系统</Space>
         </div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={[routes[0].routes[1].path]}>
             <Menu.Item key={routes[0].routes[1].path}>
@@ -49,7 +49,7 @@ export default class BasicLayout extends Component {
           </Menu>
         </Sider>
         <Layout >
-        <Header style={{ background: '#fff', textAlign: 'right', padding: 0 }}><a style={{marginRight:40}}><Link to='/login'>退出登陆</Link></a></Header>
+        <Header style={{ background: '#fff', textAlign: 'right', padding: 0 }}><Link  style={{marginRight:40}} to='/login'>退出登陆</Link></Header>
           <Content style={{ margin: '24px 16px 0' }}>
             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
               {this.props.children}

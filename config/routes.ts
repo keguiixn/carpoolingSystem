@@ -54,7 +54,7 @@ export default [
           },
           {
             path: '/login',
-            component: 'Login'
+            component: 'Login/Login'
           }]
       }
     ]
