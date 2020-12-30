@@ -6,3 +6,11 @@ export async function loginCheck(params) {
       data:params
   })
 }
+
+
+export async function registerUser(params) {
+  return request(`/carSystem/register`,{
+      method:'POST',
+      data:params
+  })
+}

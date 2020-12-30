@@ -4,22 +4,12 @@ export default [
         component: '../../layout/AdminLayout',
         routes: [
           {
-            path: '/admin',
-            component: 'Helloworld',
+            path: '/admin',name: '主页',component: 'Helloworld',isShow: true
           },
-          {
-            path: '/admin/helloworld',
-            name: '主页',
-            component: 'Helloworld'
-          },
-          {
-            path: '/admin/dashboard',
-            routes: [
-              { path: '/admin/dashboard/analysis', component: 'Dashboard/Analysis',name:"分析页"},
-              { path: '/admin/dashboard/monitor', component: 'Dashboard/Monitor' ,name:'监控页'},
-              { path: '/admin/dashboard/workplace', component: 'Dashboard/Workplace',name:"工作台" }
-            ]
-          },
+          { path: '/admin/dashboard/user', component: './AdminDashboard/User/',name:"用户管理" ,isShow: true },
+          { path: '/admin/dashboard/carPooling', component: './AdminDashboard/CarPooling/' ,name:'拼车信息管理',isShow: true},
+          { path: '/admin/dashboard/forum', component: './AdminDashboard/Forum/',name:"论坛管理" ,isShow: true},
+          { path: '/admin/dashboard/notice', component: './AdminDashboard/Notice/',name:"公告管理" ,isShow: true},
         ]
       },
       {
@@ -27,23 +17,12 @@ export default [
         component: '../../layout/UserLayout',
         routes: [
           {
-            path: '/user',
-            component: 'Helloworld',
+            path: '/user',name: '主页',component: 'Helloworld',isShow: true
           },
-          {
-            path: '/user/helloworld',
-            name:'你好世界',
-            component: 'Helloworld'
-          },
-          {
-            path: '/user/dashboard',
-            routes: [
-              { path: '/user/dashboard/analysis', component: 'Dashboard/Analysis',name:'分析页'},
-              { path: '/user/dashboard/monitor', component: 'Dashboard/Monitor' ,name:'监控页'},
-              { path: '/user/dashboard/workplace', component: 'Dashboard/Workplace' ,name:'工作台'}
-            ]
-            }
-          ]
+          { path: '/user/dashboard/carPooling', component: 'AdminDashboard/CarPooling/CarPooling' ,name:'拼车信息',isShow: true},
+          { path: '/user/dashboard/forum', component: 'AdminDashboard/Forum/Forum',name:"拼车论坛" ,isShow: true},
+          { path: '/user/dashboard/notice', component: 'AdminDashboard/Notice/Notice',name:"公告信息" ,isShow: true},
+        ]
       },
       {
         path:'/',
