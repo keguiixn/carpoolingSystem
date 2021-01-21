@@ -5,6 +5,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {history} from 'umi'
 import styles from './index.less'
 import logo from '../images/gduf.png'
+import { Layout } from 'antd';
 
 const { TabPane } = Tabs;
 
@@ -51,7 +52,7 @@ export default class Login extends Component {
         return (
             <div className={styles['login']} >
             <Card  style={{minWidth:'25%',marginTop:'10%'}}>
-                <p style={{color:'#008c8c',fontWeight:'bold',fontSize:30}}> <img className={styles['img']} src={logo}></img>拼车系统登录</p>
+                <p style={{color:'#008c8c',fontWeight:'bold',fontSize:30}}> <img className={styles['img']} src={logo}></img>拼车管理系统登录</p>
                 <Tabs defaultActiveKey="1" centered type="card">
                     <TabPane tab="登陆" key="login">
                         <Form
