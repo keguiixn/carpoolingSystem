@@ -48,7 +48,7 @@ export default class BasicLayout extends Component {
           </Menu>
         </Sider>
         <Layout >
-        <Header style={{ background: '#fff', textAlign: 'right', padding: 0 }}><Link  style={{marginRight:40}} to='/login'>退出登陆</Link></Header>
+        <Header style={{ background: '#fff', textAlign: 'right', padding: 0 }} onClick={()=>sessionStorage.clear()}><Link  style={{marginRight:40}} to='/login'>退出登陆</Link></Header>
           <Content style={{ margin: '24px 16px 0' }}>
             <div style={{ padding: 24, background: '#fff' ,color:'black',width:' 100%',height: '100%'}}>
               {this.props.children}

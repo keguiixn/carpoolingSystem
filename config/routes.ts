@@ -20,7 +20,9 @@ export default [
             path: '/user',name: '主页',component: 'Helloworld',isShow: true
           },
           { path: '/user/dashboard/carPooling', component: 'UserDashboard/CarPooling/CarPooling' ,name:'拼车信息',isShow: true},
+          { path: '/user/dashboard/carPooling/Detail', component: 'UserDashboard/CarPooling/CarPoolDetail' ,isShow: false},
           { path: '/user/dashboard/forum', component: 'UserDashboard/Forum/Forum',name:"拼车论坛" ,isShow: true},
+          { path: '/user/dashboard/forum/Detail', component: 'UserDashboard/Forum/ForumDetail' ,isShow: false},
           { path: '/user/dashboard/notice', component: 'UserDashboard/Notice/Notice',name:"公告信息" ,isShow: true},
         ]
       },

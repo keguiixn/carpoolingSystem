@@ -5,6 +5,15 @@ import route  from './routes'
 export default defineConfig ({
     antd: {},
     routes :route,
+    dva: {
+      hmr: true,
+      immer: true,
+    },
+    locale: {
+      antd: true,
+      default: 'zh-CN',
+      baseNavigator: true,
+    },
     // 按需加载
     dynamicImport: {
        loading: '@/PageLoading/index',

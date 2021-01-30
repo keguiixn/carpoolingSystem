@@ -5,7 +5,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {history} from 'umi'
 import styles from './index.less'
 import logo from '../images/gduf.png'
-import { Layout } from 'antd';
+import { v4 as uuidv4 } from 'uuid';
 
 const { TabPane } = Tabs;
 
@@ -23,9 +23,11 @@ export default class Login extends Component {
         const result = await loginCheck(values) 
         if(result.status === 200){
             if(result.auth === 'admin'){
+                sessionStorage.setItem('admin', result.name)
                 history.push('/admin')
             }
             else{
+                sessionStorage.setItem('user', result.name)
                 history.push('/user')
             }
         }
@@ -35,7 +37,7 @@ export default class Login extends Component {
       };
 
     onRegisterFinish = async values => {
-        const result = await registerUser({...values,auth:0}) 
+        const result = await registerUser({...values,auth:0,userId:uuidv4()}) 
         if(result.code === 1){
             message.error(result.message)
         }
@@ -118,6 +120,18 @@ export default class Login extends Component {
                         rules={[{ required: true, message: '请输入年龄' }]}>
                             <InputNumber  style={{   width:' 25%',marginLeft:-80}} min={1}  />
                             </Form.Item >
+                            <Form.Item
+                    label="联系人电话"
+                    name="telPhone"
+                    rules={[
+                        {required:true,message: '请输入手机号'},
+                        {
+                            pattern: /^1[3|4|5|7|8][0-9]\d{8}$/, message: '请输入正确的手机号'
+                        },
+                      ]}
+                   >
+                        <Input placeholder="请输入手机号码" />          
+                </Form.Item>
                         <Form.Item >
                             <Button type="primary" htmlType="submit"  >
                             注册
