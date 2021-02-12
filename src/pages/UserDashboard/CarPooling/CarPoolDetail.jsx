@@ -13,7 +13,9 @@ class CarPoolDetail extends Component {
     }
 
     componentDidMount(){      
-        this.props.getCarPoolingInfo()
+        if(this.props.carPoolingInfo.carpoolinformationList.length<1&&this.props.carPoolingInfo){
+            this.props.getCarPoolingInfo()
+          }
     }
 
     UserDetail = name=>{

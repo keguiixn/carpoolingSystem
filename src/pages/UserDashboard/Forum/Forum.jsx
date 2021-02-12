@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { List, Avatar, Space,Card,Select,Button } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined,DislikeOutlined,StarFilled } from '@ant-design/icons';
-import {getForumInfo} from './service'
+
 import {Link} from 'umi'
 import {connect} from 'dva'
 
@@ -30,9 +30,9 @@ class Forum extends Component {
     }
 
     async componentDidMount(){
-        if(this.props.forumInfo.forumList.length<1&&this.props.forumInfo){
-            this.props.getforumInfo()
-          }
+      if(this.props.forumList&&this.props.forumList.length===0){
+        this.props.getforumInfo()
+    }
     }
 
     handle=value=>{
@@ -54,7 +54,7 @@ class Forum extends Component {
               },
               pageSize: 3,
             }}
-            dataSource={this.props.forumInfo.forumList}
+            dataSource={this.props.forumList}
             renderItem={item => (
               <List.Item
                 key={item.title}
@@ -77,11 +77,13 @@ class Forum extends Component {
         )
     }
 }
-const mapStateToProps = state  => ({
-    forumInfo: state.forumInfo
+const mapStateToProps = state  => ({    
+  forumList: state.forumInfo.forumList,
+  commentsList:state.forumInfo.commentsList
 })
 const mapDispatchToProps = dispatch => ({
-getforumInfo:() => dispatch({type:"forumInfo/fetchforumInfo"}),
+  getforumInfo:() => dispatch({type:"forumInfo/fetchforumInfo"}),
+  getcommentInfo:payload => dispatch({type:"forumInfo/fetchcommentInfo",payload}),
 })
 
 
