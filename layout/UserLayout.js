@@ -19,10 +19,16 @@ const icon =[<HomeOutlined />,< UserOutlined/>,<SendOutlined />,<FormOutlined />
 export default class BasicLayout extends Component {
   state = {
     collapsed: false,
+    current:this.props.location.pathname
   };
 
   onCollapse = collapsed => {
     this.setState({ collapsed });
+  };
+  handleClick = e => {
+    this.setState({
+      current: e.key,
+    });
   };
 
   render() {
@@ -34,7 +40,7 @@ export default class BasicLayout extends Component {
         <div style={{ height: '32px',lineHeight:'32px',textAlign:"center", background: 'rgba(255,255,255,.2)', margin: '16px',overflow:"hidden"}}>
         <DesktopOutlined style={{paddingLeft:"10px"}}/><Space style={{marginLeft:"20px"}}>高校拼车系统</Space>
         </div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={[routes[1].routes[0].path]} >
+        <Menu theme="dark" mode="inline"  onClick={this.handleClick} selectedKeys={[this.state.current]} >
           {
             UserRoute&&UserRoute.map((item,i)=>
               <Menu.Item key={item.path}>

@@ -88,7 +88,7 @@ export default class GlobalForm extends Component {
                     name="startPoint"
                     rules={[{required:true,message:'请输入出发点'}]}
                    >
-                        <Cascader options={options} onChange={(value)=>this.onChange('startPoint',value)} placeholder="Please select" />
+                        <Cascader options={options} onChange={(value)=>this.onChange('startPoint',value)} placeholder="请选择" />
                 </Form.Item>
 
                 <Form.Item
@@ -96,7 +96,7 @@ export default class GlobalForm extends Component {
                     name="endPoint"
                     rules={[{required:true,message:'请输入目的点'}]}
                    >
-                        <Cascader options={options} onChange={(value)=>this.onChange('endPoint',value)} placeholder="Please select" />
+                        <Cascader options={options} onChange={(value)=>this.onChange('endPoint',value)} placeholder="请选择" />
                 </Form.Item>
                 <Form.Item
                     label="发起人"

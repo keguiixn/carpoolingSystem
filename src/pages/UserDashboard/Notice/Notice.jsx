@@ -21,7 +21,6 @@ class Notice extends Component {
 
     render() {
         const {noticeList} = this.state
-        console.log(noticeList)
         return (
             <Card>
                 <Collapse

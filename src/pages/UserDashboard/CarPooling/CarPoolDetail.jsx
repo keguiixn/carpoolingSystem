@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Descriptions ,Button,Drawer} from 'antd';
+import { Descriptions ,Button,Drawer,Message} from 'antd';
 import {connect} from 'dva'
 import moment from 'moment'
-import {getUserInfo} from './service'
+import {getUserInfo,addReport} from './service'
 
 
 class CarPoolDetail extends Component {
@@ -13,9 +13,7 @@ class CarPoolDetail extends Component {
     }
 
     componentDidMount(){      
-        if(this.props.carPoolingInfo.carpoolinformationList.length<1&&this.props.carPoolingInfo){
-            this.props.getCarPoolingInfo()
-          }
+        this.props.getCarPoolingInfo()         
     }
 
     UserDetail = name=>{
@@ -43,6 +41,17 @@ class CarPoolDetail extends Component {
     showModal=async(item)=>{
         const Info = await getUserInfo({username:item})
         this.setState({visible : true,userRecord:Info.userInfo[0],user:item})
+    }
+
+    setTimes=async(name)=>{
+        const user = sessionStorage.getItem('user')
+        const params = {}
+        params.timespeople = user
+        params.username = name
+        const result = await addReport(params)
+        if(result.status===200){
+            Message.success(result.message)
+        }
     }
 
     render() {
@@ -93,6 +102,9 @@ class CarPoolDetail extends Component {
                     <Descriptions.Item label="用户身份">{userRecord&&userRecord.auth===1?'管理员':'普通用户'}</Descriptions.Item>
                     <Descriptions.Item label="联系方式">{userRecord&&userRecord.telPhone}</Descriptions.Item>
                     </Descriptions>
+                    <Button type='link' style={{ marginTop: 80 }} onClick={()=>this.setTimes(userRecord.username)}>
+                        举报此人
+                    </Button>
                 </Drawer>
             </div>
             

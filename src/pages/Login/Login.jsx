@@ -24,11 +24,11 @@ export default class Login extends Component {
         if(result.status === 200){
             if(result.auth === 'admin'){
                 sessionStorage.setItem('admin', result.name)
-                history.push('/admin')
+                history.push('/admin/dashboard/user')
             }
             else{
                 sessionStorage.setItem('user', result.name)
-                history.push('/user')
+                history.push('/user/dashboard/carPooling')
             }
         }
         else{

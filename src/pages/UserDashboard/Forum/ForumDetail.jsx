@@ -3,7 +3,7 @@ import {Card,Row,Col ,Comment, Message, Form, Button, List, Input} from 'antd';
 import {connect} from 'dva'
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
-import {addCommentInfo} from './service'
+import {addCommentInfo,getCommentInfo} from './service'
 
 const { TextArea } = Input;
 
@@ -12,6 +12,9 @@ const CommentList = ({ comments }) => (
     dataSource={comments}
     header={`${comments.length} 条评论`}
     itemLayout="horizontal"
+    pagination={{
+      pageSize: 3,
+    }}
     renderItem={props => <Comment {...props} />}
   />
 );
@@ -79,19 +82,18 @@ class ForumDetail extends Component {
         });
     };
         
-    componentDidMount(){
+   async componentDidMount(){
         if(this.props.forumList&&this.props.forumList.length===0){
             this.props.getforumInfo()
-        }
-        if(this.props.commentsList&&this.props.commentsList.length===0){
-          this.props.getcommentInfo({id:this.props.location.query.id})
-      }
-
-
+        }     
+        const result = await getCommentInfo({id:this.props.location.query.id})
+        const data = result.commentsList.map(item => JSON.parse(item))
+        this.setState({
+          comments:data
+        })
     }
     render() {
         const { comments, submitting, value } = this.state;
-
         const forumInfo = this.props.forumList.filter(item =>item.forumId===this.props.location.query.id)
         return (
           <Fragment>

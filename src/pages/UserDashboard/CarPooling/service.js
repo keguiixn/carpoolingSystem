@@ -25,3 +25,9 @@ export function newCarpoolInfo(params){
         method:'POST',
         data: params})
 }
+
+export function addReport(params){
+    return request(`/carSystem/addReport`,{
+        method:'POST',
+        data: params})
+}

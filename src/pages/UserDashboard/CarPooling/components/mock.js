@@ -1,31 +1,31 @@
 const  arearData = [
     {
-      value: 'zhejiang',
-      label: 'Zhejiang',
+      value: '广州',
+      label: '广州',
       children: [
         {
-          value: 'hangzhou',
-          label: 'Hangzhou',
+          value: '天河区',
+          label: '天河区',
           children: [
             {
-              value: 'xihu',
-              label: 'West Lake',
+              value: '龙洞',
+              label: '龙洞',
             },
           ],
         },
       ],
     },
     {
-      value: 'jiangsu',
-      label: 'Jiangsu',
+      value: '汕头市',
+      label: '汕头市',
       children: [
         {
-          value: 'nanjing',
-          label: 'Nanjing',
+          value: '潮南区',
+          label: '潮南区',
           children: [
             {
-              value: 'zhonghuamen',
-              label: 'Zhong Hua Men',
+              value: '峡山',
+              label: '峡山',
             },
           ],
         },
