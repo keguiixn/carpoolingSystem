@@ -109,7 +109,7 @@ class CarPooling extends Component {
 
     submit=async(values)=>{     
       const result = await newCarpoolInfo(values)
-      if(result.code === 0){
+      if(result.status === 200){
         this.setState({
           visible:false
         },()=>{

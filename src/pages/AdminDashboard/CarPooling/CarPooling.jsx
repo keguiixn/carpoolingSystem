@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import {Card,Space,Button,Tooltip,Message} from 'antd'
+import {Card,Space,Button,Popconfirm,Message} from 'antd'
 import ProTable from '@ant-design/pro-table';
 import moment from 'moment'
 import {getCarPoolingInfo} from '../../UserDashboard/CarPooling/service'
+import {DeleteCarInfo} from './service'
 
 
 class CarPooling extends Component {
@@ -12,7 +13,6 @@ class CarPooling extends Component {
           title: '发起人',
           dataIndex: 'initiator',
           key:'initiator',
-          search:false
         },
         {
           title: '出发点',
@@ -47,7 +47,14 @@ class CarPooling extends Component {
           valueType: 'option',
           render: (text,record) => (
              <>
-               <Button type='link'  onClick={()=>this.showEditModal(record.carInfoid)}>删除</Button>
+              <Popconfirm
+                  title="确定删除吗"
+                  onConfirm={()=>this.deleteCarInfo(record.carInfoid)}
+                  okText="确定"
+                  cancelText="取消"
+                >
+               <Button type='link'>删除</Button>
+               </Popconfirm>
              </> 
           )
         }
@@ -58,6 +65,7 @@ class CarPooling extends Component {
     constructor(props){
         super(props);
         this.state={
+          selectedRowKeys:[]
         }
     }
 
@@ -65,6 +73,30 @@ class CarPooling extends Component {
 
     async componentDidMount(){
 
+  }
+
+  deleteCarbatchInfo=async()=>{
+    const params = this.state.selectedRowKeys
+    const result = await DeleteCarInfo({carInfoid:params})
+    if(result.status === 200){
+      Message.success(result.message)
+      this.CarActionRef.current.reloadAndRest()
+    }
+    else{
+      Message.error(result.message)
+    }
+  }
+
+  deleteCarInfo= async(carInfoid)=>{
+    const params = [carInfoid]
+    const result = await DeleteCarInfo({carInfoid:params})
+    if(result.status === 200){
+      Message.success(result.message)
+      this.CarActionRef.current.reloadAndRest()
+    }
+    else{
+      Message.error(result.message)
+    }
   }
  
 
@@ -74,11 +106,41 @@ class CarPooling extends Component {
         return (
             <Card>
                 <ProTable  
+                      rowSelection={{
+                        type: "checkbox",                   
+                        onChange: (selectedRowKeys, selectedRows) => { 
+                          this.setState({
+                            selectedRowKeys
+                          })                   
+                        }
+                      }
+                    }
+                    tableAlertOptionRender={() => {
+                      return (
+                        <Space size={16}>
+                          <Popconfirm
+                              title="确定删除吗"
+                              onConfirm={()=>this.deleteCarbatchInfo()}
+                              okText="确定"
+                              cancelText="取消"
+                            >
+                          <a>批量删除</a>
+                          </Popconfirm>
+                        </Space>
+                      );
+                    }}
                      rowKey="carInfoid"
                      actionRef={this.CarActionRef}
                      columns={this.Carcolumns}
                      request={async params =>{
-                         const result = await getCarPoolingInfo()                         
+                       let result
+                      if(params.initiator){
+                        result = await getCarPoolingInfo({initiator:params.initiator})  
+                       }
+                       else{
+                        result = await getCarPoolingInfo()  
+                       }
+                                                 
                          if(result.success === true){
                            return{
                              data:result.carpoolinformationList,

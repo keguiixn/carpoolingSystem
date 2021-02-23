@@ -140,21 +140,7 @@ class User extends Component {
         return (
             <Card>
                 <ProTable  
-                 rowSelection={{
-                    type: "radio",
-                    onChange: (selectedRowKeys, selectedRows) => {
-                      this.setState({
-                        selectedRows,
-                        selectedRowKeys:selectedRowKeys[0]
-                      },()=>{
-                        if(this.UserActionRef.current){
-                          this.UserActionRef.current.reloadAndRest()
-                        }         
-                      })
-                    }
-                  }
-                }
-                     rowKey="carInfoid"
+                     rowKey="userId"
                      actionRef={this.UserActionRef}
                      columns={this.Usercolumns}
                      request={async params =>{

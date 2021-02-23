@@ -48,6 +48,9 @@ class CarPoolDetail extends Component {
         const params = {}
         params.timespeople = user
         params.username = name
+        if(name === user){
+            return Message.info('无法举报自己')
+        }
         const result = await addReport(params)
         if(result.status===200){
             Message.success(result.message)
